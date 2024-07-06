@@ -1,0 +1,18 @@
+{
+  "name": "wp_api_torrent_plugin",
+  "version": "1.0.0",
+  "description": "Wordpress plugin torrent api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Habibouldmoussa/wp_Api_torrent_plugin.git"
+  },
+  "keywords": [
+    "barbaroussa"
+  ],
+  "author": "habib ouldmoussa",
+  "license": "ISC"
+}
