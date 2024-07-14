@@ -2,10 +2,10 @@
 
 class barbarousseApi
 {
-
-    private $apiurl = "https://barbaroussa.alwaysdata.net/www/api_tor/";
-    public function __construct()
+    protected string $apiurl; 
+    public function __construct(string $apiurl)
     {
+        this->apiurl = $apiurl
     }
 
     private function callapi($urlvar)
