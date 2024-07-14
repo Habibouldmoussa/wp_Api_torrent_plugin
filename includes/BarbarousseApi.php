@@ -2,8 +2,8 @@
 
 class barbarousseApi
 {
-    private $apiurl = "https://barbaroussa.alwaysdata.net/www/api_tor/";
 
+    private $apiurl = "https://barbaroussa.alwaysdata.net/www/api_tor/";
     public function __construct()
     {
     }
@@ -42,7 +42,6 @@ class barbarousseApi
         } else {
             $provs = $prov[0];
         }
-
         return $this->callapi('torrents/?cherch=' . $search . '&prov[]=' . $provs . '&cat=' . $cat);
     }
     public function testclass()

@@ -16,7 +16,11 @@ function barbarousse_Add_My_Admin_Link()
     'api_torrent/includes/barbarousse-page.php' // The 'slug' - file to display when clicking the link
   );
 }
-
+function fontawesome()
+{
+  wp_enqueue_script('font-awesome', 'https://kit.fontawesome.com/253bfe4b5c.js');
+}
+add_action('wp_enqueue_scripts', 'fontawesome');
 
 function fonction_shortcode_resulta_search($param, $content)
 {
@@ -28,11 +32,12 @@ function fonction_shortcode_resulta_search($param, $content)
   $res = $api->getTorrent($cherch, $prov, $cat);
 
 
-  echo "<div class='container'>
-   <div class='row'>
-   <div class='col-md-12'>
+  echo "<br> 
+  <div class='container'>
+    <div class='row'>
+    <div class='col-md-12 table-responsive'>
 
-   <table class='table table-striped table-responsive-md'>
+   <table class='table table-striped  table-hover '>
      <tr>
       <th>Titre</th>      
       <th>Catégorie</th>      
@@ -40,23 +45,40 @@ function fonction_shortcode_resulta_search($param, $content)
       <th>Seeds</th>      
       <th>Peers</th>      
       <th>Size</th>      
-      <th>Download</th>
+      <th width='50%'>Download</th>
       <th>Provider</th>
      </tr>";
 
   foreach ($res as $key => $value) {
     echo "<tr>";
     echo "<td>" . $value->title . "</td>";
-    echo "<td>" . $value->category . "</td>";
-    echo "<td>" . $value->time . "</td>";
+    if (isset($value->category)) {
+      echo "<td>" . $value->category . "</td>";
+    } else {
+      echo "<td>Unknown</td>";
+    }
+    if (isset($value->time)) {
+      echo "<td>" . $value->time . "</td>";
+    } else {
+      echo "<td>0</td>";
+    }
     echo "<td>" . $value->seeds . "</td>";
-    echo "<td>" . $value->peers . "</td>";
+    if (isset($value->peers)) {
+      echo "<td>" . $value->peers . "</td>";
+    } else {
+      echo "<td>0</td>";
+    }
     echo "<td>" . $value->size . "</td>";
-    echo "<td>" . $value->magnet . "</td>";
+    if (isset($value->magnet)) {
+      echo "<td style='max-width:100px;word-break: break-word;' > <i class='fa-solid fa-magnet'></i> <a href='  " . $value->magnet . "' title='downoload' >DOWNLOAS MAGNET</a> </td>";
+    } else {
+      echo "<td>N/A</td>";
+    }
     echo "<td>" . $value->provider . "</td>";
     echo "</tr>";
   }
   echo  "</table>
+  </div>
   </div>
   </div>
   ";
