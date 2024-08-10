@@ -2,12 +2,18 @@
 
 class barbarousseApi
 {
-    protected string $apiurl; 
+    protected string $apiurl;
     public function __construct(string $apiurl)
     {
-        this->apiurl = $apiurl
+        $this->apiurl = $apiurl;
     }
-
+    /**
+     * Makes a GET request to the API endpoint specified by the $urlvar parameter.
+     *
+     * @param string $urlvar The path to append to the API URL.
+     *
+     * @return object The JSON decoded response from the API.
+     */
     private function callapi($urlvar)
     {
         $curl = curl_init();
@@ -26,6 +32,15 @@ class barbarousseApi
         curl_close($curl);
         return json_decode($response);
     }
+    /**
+     * Retrieves torrents from the specified provider(s) based on the search query and category.
+     *
+     * @param string $search The search query to find torrents.
+     * @param string|array $prov (optional) The provider(s) to search in. Defaults to "ThePirateBay".
+     * @param string $cat The category of torrents to search in.
+     *
+     * @return object The JSON decoded response from the API containing the torrents.
+     */
     public function getTorrent($search, $prov = "ThePirateBay", $cat)
     {
         if ((count($prov) === 0) || $prov === NULL) {
